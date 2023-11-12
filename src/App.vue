@@ -31,6 +31,12 @@
         this.description = "";
         this.label = "";
         this.priority = "";
+      },
+      changeTaskPriority(object) {
+        let task = this.tasks.find(task => task.id = object.id);
+        if (task) {
+          task.priority = object.newPriority
+        }
       }
     }
   }
@@ -67,7 +73,7 @@
     </div>
   </div>  -->
 
-  <div class="container">
+  <!-- <div class="container">
     <div class="task-container">
       <TaskComponent v-for="task in tasks" :key="task.id"
       v-bind:id="task.id"
@@ -76,7 +82,16 @@
       v-bind:priority="task.priority"
       />
     </div>
-  </div> 
+  </div>  -->
+
+  <div class="container">
+    <div class="task-container">
+      <TaskComponent v-for="task in tasks" :key="task.id"
+        v-bind:task="task"
+        v-on:changePriority="changeTaskPriority"
+      />
+    </div>
+  </div>
 </template>
 
 <style>
