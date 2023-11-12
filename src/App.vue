@@ -1,4 +1,5 @@
 <script>
+  import TaskComponent from '@/components/TaskComponent.vue'
   export default {
     data() {
       return {
@@ -9,10 +10,15 @@
       }
     },
 
+    components: {
+      TaskComponent
+    },
+
     methods: {
       addTask() {
         //ingevulde data in object steken
         const newTask = {
+          id: this.tasks.length + 1,
           description: this.description,
           label: this.label,
           priority: this.priority
@@ -34,22 +40,22 @@
   <div class="container">
     <form v-on:submit.prevent="addTask()">
       <div class="form__field">
-        <label for="">Omschrijving</label>
-        <input type="text" v-model="description" name="" id="">
+        <label>Omschrijving</label>
+        <input type="text" v-model="description">
       </div>
       <div class="form__field">  
-        <label for="">Label</label>
-        <input type="text" v-model="label" name="" id="">
+        <label>Label</label>
+        <input type="text" v-model="label">
       </div>
       <div class="form__field">
-        <label for="">Prioriteit</label>
-        <input type="text" v-model="priority" name="" id="">
+        <label>Prioriteit</label>
+        <input type="text" v-model="priority">
       </div>
         <button type="submit">Voeg taak toe</button>
     </form>
   </div>
 
-  <div class="container">
+  <!-- <div class="container">
     <div class="task-container" v-for="task in tasks" :key="task.description">
       <div class="task-content">
         <span class="task-label">{{task.label}}</span>
@@ -58,6 +64,17 @@
         </div>
         <p class="task-priority">Prioriteit: {{task.priority}}</p>
       </div>
+    </div>
+  </div>  -->
+
+  <div class="container">
+    <div class="task-container">
+      <TaskComponent v-for="task in tasks" :key="task.id"
+      v-bind:id="task.id"
+      v-bind:description="task.description"
+      v-bind:label="task.label"
+      v-bind:priority="task.priority"
+      />
     </div>
   </div> 
 </template>
